@@ -1,0 +1,58 @@
+## Description
+
+<!-- Provide a brief description of what this PR does -->
+
+## Type of Change
+
+- [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
+- [ ] ✨ New feature (non-breaking change which adds functionality)
+- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] 📝 Documentation update
+- [ ] 🎨 Style/UI update (no functional changes)
+- [ ] ♻️ Code refactoring (no functional changes)
+- [ ] ⚡ Performance improvement
+- [ ] ✅ Test update
+
+## Changes Made
+
+<!-- List the specific changes made in this PR -->
+
+-
+-
+-
+
+## Screenshots/Videos
+
+<!-- If applicable, add screenshots or videos to demonstrate the changes -->
+
+## Testing
+
+- [ ] Tested locally with `npm run dev`
+- [ ] Type checking passes (`npm run type-check`)
+- [ ] Linting passes (`npm run lint`)
+- [ ] Build succeeds (`npm run build`)
+- [ ] Tested in dark mode
+- [ ] Tested responsive design (mobile, tablet, desktop)
+- [ ] Tested keyboard navigation
+- [ ] Tested with screen reader (if applicable)
+
+## Related Issues
+
+<!-- Link any related issues using #issue_number -->
+
+Closes #
+
+## Checklist
+
+- [ ] My code follows the project's code style
+- [ ] I have performed a self-review of my code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] My changes generate no new warnings
+- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] New and existing unit tests pass locally with my changes
+- [ ] Any dependent changes have been merged and published
+
+## Additional Notes
+
+<!-- Add any additional notes, context, or information that reviewers should know -->
