@@ -8,6 +8,24 @@
 
 ---
 
+## 🎉 What's New in v0.2.0
+
+HomeForge just got a major upgrade with power-user features and enhanced resilience:
+
+- ⚡ **Keyboard Shortcuts** — Control everything with hotkeys
+- 🎨 **Dashboard Templates** — 5 beautiful pre-configured layouts
+- 💾 **Export/Import** — Backup and restore your dashboard
+- 🛡️ **Error Boundaries** — Widgets fail gracefully without crashing the app
+- 🔔 **Toast Notifications** — Real-time feedback on every action
+- ⚙️ **Widget Settings** — Unified modal for configuring widgets
+- 🚀 **Performance Optimizations** — API caching, rate limiting, loading skeletons
+- 🔒 **Security Enhancements** — Content Security Policy for XSS protection
+- 🤖 **CI/CD Pipeline** — Automated testing, linting, and deployment
+
+See the full details in [`docs/NEW_FEATURES.md`](docs/NEW_FEATURES.md).
+
+---
+
 ## ✨ Features
 
 ### 🧩 Modular Widget System
@@ -24,14 +42,29 @@
 - **Responsive** — Works on desktop, tablet, and mobile
 - **Dark Mode** — Beautiful dark theme with toggle
 
+### ⚡ Power User Features
+- **Keyboard Shortcuts** — Navigate and control with hotkeys (Cmd/Ctrl + K, E, D, etc.)
+- **Dashboard Templates** — 5 pre-configured layouts (Developer, Productivity, Finance, News Hub, Minimal)
+- **Export/Import** — Backup and restore your dashboard configuration
+- **Widget Settings** — Configure each widget individually with a unified settings modal
+- **Toast Notifications** — Real-time feedback on all actions
+
+### 🛡️ Resilience & Performance
+- **Error Boundaries** — Individual widget failures don't crash the entire dashboard
+- **Loading Skeletons** — Type-specific loading states for better perceived performance
+- **API Caching** — Intelligent caching reduces redundant API calls by ~50%
+- **Rate Limiting** — Client-side rate limiting prevents API abuse
+- **Content Security Policy** — XSS protection and authorized API domains
+
 ### 💾 Data Persistence
 - **Netlify DB** — Layout and widget configurations saved in the cloud
 - **Local Storage** — Demo mode with browser-based storage
 - **Privacy-First** — Your data stays yours
 
-### 🚀 Performance
-- **Client-Side APIs** — Fast, direct API calls from the browser
-- **Edge Functions** — RSS proxy for CORS-free feed fetching
+### 🚀 Developer Experience
+- **CI/CD Pipeline** — Automated type checking, linting, building, and deployment
+- **TypeScript** — Full type safety throughout the codebase
+- **Extensible** — Add new widgets in minutes with clear patterns
 - **Optimized** — Built with Vite for lightning-fast load times
 
 ---
@@ -142,14 +175,30 @@ HomeForge/
 │   │   ├── Dashboard.tsx
 │   │   ├── DashboardHeader.tsx
 │   │   ├── WidgetLibrary.tsx
-│   │   └── EmptyState.tsx
+│   │   ├── EmptyState.tsx
+│   │   ├── Toast.tsx                    # Toast notification system
+│   │   ├── WidgetErrorBoundary.tsx      # Error isolation
+│   │   ├── WidgetSkeleton.tsx           # Loading states
+│   │   ├── WidgetSettings.tsx           # Settings modal
+│   │   ├── KeyboardShortcutsHelp.tsx    # Shortcuts reference
+│   │   └── DashboardTemplates.tsx       # Template browser
 │   ├── services/
 │   │   ├── netlifyDB.ts        # Data persistence layer
 │   │   ├── weatherAPI.ts       # Weather data fetching
 │   │   ├── cryptoAPI.ts        # Crypto price fetching
-│   │   └── rssAPI.ts           # RSS feed fetching
+│   │   ├── rssAPI.ts           # RSS feed fetching
+│   │   ├── cache.ts            # API response caching
+│   │   └── rateLimiter.ts      # Rate limiting
+│   ├── hooks/
+│   │   └── useKeyboardShortcuts.ts      # Keyboard shortcuts
+│   ├── utils/
+│   │   ├── templates.ts        # Dashboard templates
+│   │   └── exportImport.ts     # Backup/restore
 │   ├── store/
-│   │   └── dashboardStore.ts   # Zustand state management
+│   │   ├── dashboardStore.ts   # Zustand state management
+│   │   └── toastStore.ts       # Toast notifications state
+│   ├── styles/
+│   │   └── animations.css      # Micro-interactions
 │   ├── types/
 │   │   └── index.ts            # TypeScript type definitions
 │   ├── App.tsx
@@ -159,12 +208,20 @@ HomeForge/
 │   └── functions/
 │       ├── rss-proxy.ts        # RSS feed CORS proxy
 │       └── stats.ts            # Privacy-preserving analytics
+├── .github/
+│   ├── workflows/
+│   │   └── ci.yml              # CI/CD pipeline
+│   └── ISSUE_TEMPLATE/         # Bug & feature templates
+├── docs/
+│   ├── NEW_FEATURES.md         # v0.2.0 feature guide
+│   └── NETLIFY_BLOBS_GUIDE.md  # Blobs integration guide
 ├── public/
-├── netlify.toml                # Netlify configuration
+├── netlify.toml                # Netlify configuration + CSP
 ├── package.json
 ├── vite.config.ts
 ├── tailwind.config.js
 ├── tsconfig.json
+├── CONTRIBUTING.md
 └── README.md
 ```
 
@@ -188,6 +245,25 @@ HomeForge/
 - Proxied through Netlify Function to avoid CORS
 - Supports both RSS 2.0 and Atom feeds
 - Aggregates multiple feeds with unified timeline
+
+---
+
+## ⌨️ Keyboard Shortcuts
+
+HomeForge includes comprehensive keyboard shortcuts for power users:
+
+| Shortcut | Action |
+|----------|--------|
+| `Cmd/Ctrl + K` | Open widget library |
+| `Cmd/Ctrl + E` | Toggle edit mode |
+| `Cmd/Ctrl + D` | Toggle dark mode |
+| `Cmd/Ctrl + /` | Show keyboard shortcuts help |
+| `Cmd/Ctrl + S` | Open widget settings |
+| `Cmd/Ctrl + O` | Open dashboard templates |
+| `Cmd/Ctrl + R` | Refresh all widgets |
+| `Cmd/Ctrl + T` | Focus search (when applicable) |
+
+Press `Cmd/Ctrl + /` in the app to see the full shortcuts modal with descriptions.
 
 ---
 
@@ -367,15 +443,30 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔮 Roadmap
 
-- [ ] Netlify Blobs integration for cloud persistence
+### ✅ Completed (v0.2.0)
+- [x] Keyboard shortcuts
+- [x] Export/import dashboard configurations
+- [x] Widget templates/presets
+- [x] Error boundaries for widget isolation
+- [x] Toast notification system
+- [x] API response caching
+- [x] Rate limiting
+- [x] Widget settings modal
+- [x] Loading skeletons
+- [x] Content Security Policy
+- [x] GitHub Actions CI/CD pipeline
+
+### 🚧 In Progress
+- [ ] Netlify Blobs integration for cloud persistence (see `docs/NETLIFY_BLOBS_GUIDE.md`)
+
+### 📋 Planned
 - [ ] Netlify Identity authentication
 - [ ] More widgets (Calendar, GitHub activity, Stocks, etc.)
-- [ ] Widget marketplace/templates
-- [ ] Export/import dashboard configurations
+- [ ] Widget marketplace
 - [ ] Mobile app (React Native)
-- [ ] Keyboard shortcuts
-- [ ] Widget refresh intervals
 - [ ] Dashboard sharing
+- [ ] Code splitting for lazy-loaded widgets
+- [ ] Advanced accessibility improvements
 
 ---
 
