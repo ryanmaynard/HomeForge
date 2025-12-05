@@ -47,6 +47,7 @@ const RSSWidget = ({ widgetId, config }: RSSWidgetProps) => {
     // Refresh every 10 minutes
     const interval = setInterval(loadFeeds, 10 * 60 * 1000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.feeds, maxItems]);
 
   const handleAddFeed = (url: string, title?: string) => {

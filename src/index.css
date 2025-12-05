@@ -21,10 +21,6 @@
     --color-primary: 56 189 248;
   }
 
-  * {
-    @apply border-border;
-  }
-
   body {
     @apply bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;

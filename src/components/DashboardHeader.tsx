@@ -20,10 +20,9 @@ import KeyboardShortcutsHelp from './KeyboardShortcutsHelp';
 import DashboardTemplates from './DashboardTemplates';
 import { exportDashboard, importDashboard } from '../utils/exportImport';
 import type { DashboardTemplate } from '../utils/templates';
-import { v4 as uuidv4 } from 'uuid';
 
 const DashboardHeader = () => {
-  const { theme, toggleTheme, isEditing, setIsEditing, layout, widgets, userId, addWidget, updateLayout } = useDashboardStore();
+  const { theme, toggleTheme, isEditing, setIsEditing, layout, widgets, addWidget, updateLayout } = useDashboardStore();
   const toast = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -128,21 +127,10 @@ const DashboardHeader = () => {
 
   const handleLoadTemplate = (template: DashboardTemplate) => {
     // Clear existing widgets
-    const widgetIds = Object.keys(widgets);
     // In a real implementation, we'd remove these from the store
 
-    // Load template widgets
-    const newLayout = template.widgets.map((widget) => ({
-      i: uuidv4(),
-      x: widget.position.x,
-      y: widget.position.y,
-      w: widget.position.w,
-      h: widget.position.h,
-    }));
-
     // Add each widget
-    template.widgets.forEach((widgetTemplate, index) => {
-      const widgetId = newLayout[index].i;
+    template.widgets.forEach((widgetTemplate) => {
       addWidget(widgetTemplate.type, widgetTemplate.config);
     });
 

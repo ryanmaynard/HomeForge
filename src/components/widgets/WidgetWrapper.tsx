@@ -4,7 +4,7 @@ import { useDashboardStore } from '../../store/dashboardStore';
 import { useToast } from '../Toast';
 import WidgetErrorBoundary from '../WidgetErrorBoundary';
 import WidgetSettings from '../WidgetSettings';
-import type { WidgetType, WidgetConfig } from '../../types';
+import type { WidgetType, WidgetConfig, WeatherConfig, CryptoConfig, RSSConfig, TasksConfig, QuickLinksConfig, NotesConfig } from '../../types';
 
 // Import widget components
 import WeatherWidget from './WeatherWidget';
@@ -41,17 +41,17 @@ const WidgetWrapper = ({ widgetId, type, config, isEditing }: WidgetWrapperProps
   const renderWidget = () => {
     switch (type) {
       case 'weather':
-        return <WeatherWidget widgetId={widgetId} config={config} />;
+        return <WeatherWidget widgetId={widgetId} config={config as WeatherConfig} />;
       case 'crypto':
-        return <CryptoWidget widgetId={widgetId} config={config} />;
+        return <CryptoWidget widgetId={widgetId} config={config as CryptoConfig} />;
       case 'rss':
-        return <RSSWidget widgetId={widgetId} config={config} />;
+        return <RSSWidget widgetId={widgetId} config={config as RSSConfig} />;
       case 'tasks':
-        return <TasksWidget widgetId={widgetId} config={config} />;
+        return <TasksWidget widgetId={widgetId} config={config as TasksConfig} />;
       case 'quicklinks':
-        return <QuickLinksWidget widgetId={widgetId} config={config} />;
+        return <QuickLinksWidget widgetId={widgetId} config={config as QuickLinksConfig} />;
       case 'notes':
-        return <NotesWidget widgetId={widgetId} config={config} />;
+        return <NotesWidget widgetId={widgetId} config={config as NotesConfig} />;
       default:
         return (
           <div className="p-4 text-center text-slate-500">

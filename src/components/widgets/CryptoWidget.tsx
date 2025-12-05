@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FiRefreshCw, FiTrendingUp, FiTrendingDown, FiPlus, FiX } from 'react-icons/fi';
+import { FiRefreshCw, FiTrendingUp, FiTrendingDown, FiPlus, FiX, FiDollarSign } from 'react-icons/fi';
 import { useDashboardStore } from '../../store/dashboardStore';
 import { fetchCryptoPrices } from '../../services/cryptoAPI';
 import type { CryptoConfig, CryptoPrice } from '../../types';
@@ -42,6 +42,7 @@ const CryptoWidget = ({ widgetId, config }: CryptoWidgetProps) => {
     // Refresh every 60 seconds
     const interval = setInterval(loadPrices, 60 * 1000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.symbols, config.currency]);
 
   const handleAddSymbol = () => {

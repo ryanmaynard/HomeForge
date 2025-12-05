@@ -1,12 +1,12 @@
 # Contributing to HomeForge
 
-Thank you for considering contributing to HomeForge! 🎉
+Thank you for considering contributing to HomeForge!
 
 This document provides guidelines and instructions for contributing to the project.
 
 ---
 
-## 🌟 Ways to Contribute
+## Ways to Contribute
 
 ### 1. Report Bugs
 Found a bug? Help us fix it by:
@@ -40,7 +40,7 @@ Have an idea? We'd love to hear it!
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+ and npm
@@ -58,297 +58,148 @@ Have an idea? We'd love to hear it!
      cd HomeForge
      ```
 
-2. **Add upstream remote**
-   ```bash
-   git remote add upstream https://github.com/ryanmaynard/HomeForge.git
-   ```
-
-3. **Install dependencies**
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-4. **Start the dev server**
+3. **Start the development server**
    ```bash
    npm run dev
    ```
 
-5. **Create a branch**
+4. **Make your changes**
+   - Create a new branch for your feature/fix:
+     ```bash
+     git checkout -b feature/your-feature-name
+     ```
+   - Write clear, concise commit messages
+   - Follow the existing code style
+   - Add comments for complex logic
+
+5. **Test your changes**
    ```bash
-   git checkout -b feature/your-feature-name
+   npm run type-check
+   npm run lint
+   npm run build
    ```
+
+6. **Submit a pull request**
+   - Push your changes to your fork
+   - Create a pull request from your branch to `main`
+   - Fill out the pull request template
+   - Wait for review and address any feedback
 
 ---
 
-## 📝 Code Style Guidelines
+## Code Style Guidelines
 
 ### TypeScript
 - Use TypeScript for all new code
-- Define proper types (avoid `any`)
-- Use interfaces for object shapes
-- Export types from `src/types/index.ts`
+- Define proper types and interfaces
+- Avoid using `any` type
+- Use type inference where appropriate
 
-### React Components
+### React
 - Use functional components with hooks
 - Keep components focused and single-purpose
 - Extract reusable logic into custom hooks
-- Use descriptive component names
+- Use proper prop types
 
-```typescript
-// ✅ Good
-interface WeatherWidgetProps {
-  widgetId: string;
-  config: WeatherConfig;
-}
-
-const WeatherWidget = ({ widgetId, config }: WeatherWidgetProps) => {
-  // Component logic
-};
-
-// ❌ Bad
-const WeatherWidget = (props: any) => {
-  // Component logic
-};
-```
-
-### Styling
-- Use Tailwind CSS utility classes
-- Follow the existing color scheme
+### CSS/Tailwind
+- Use Tailwind utility classes
+- Follow the existing design patterns
 - Ensure dark mode compatibility
-- Keep responsive design in mind
-
-```tsx
-// ✅ Good
-<div className="p-6 bg-white dark:bg-slate-800 rounded-lg">
-  <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
-    Title
-  </h2>
-</div>
-
-// ❌ Bad
-<div style={{ padding: '24px', backgroundColor: 'white' }}>
-  <h2 style={{ fontSize: '18px', fontWeight: 600 }}>Title</h2>
-</div>
-```
+- Test responsive layouts
 
 ### File Organization
-- Keep related code together
-- Use index files for cleaner imports
-- Follow the existing folder structure
-
-```
-src/
-├── components/
-│   └── widgets/
-│       ├── YourWidget.tsx      # Widget component
-│       └── WidgetWrapper.tsx   # Widget wrapper (update)
-├── services/
-│   └── yourAPI.ts              # API service if needed
-└── types/
-    └── index.ts                # Type definitions (update)
-```
+- Place components in appropriate directories
+- Keep files focused on a single responsibility
+- Use clear, descriptive file names
+- Export components consistently
 
 ---
 
-## 🧪 Testing
+## Pull Request Process
 
-Before submitting a PR:
+1. **Before submitting:**
+   - Ensure all tests pass
+   - Run type checking and linting
+   - Update documentation if needed
+   - Add comments for complex code
 
-1. **Test locally**
-   ```bash
-   npm run dev
-   ```
+2. **Pull request description:**
+   - Clearly describe what changes you made
+   - Explain why the changes are needed
+   - Reference any related issues
+   - Include screenshots for UI changes
 
-2. **Check types**
-   ```bash
-   npm run type-check
-   ```
-
-3. **Lint code**
-   ```bash
-   npm run lint
-   ```
-
-4. **Build for production**
-   ```bash
-   npm run build
-   npm run preview
-   ```
-
-5. **Test in different browsers**
-   - Chrome/Edge
-   - Firefox
-   - Safari (if possible)
-
-6. **Test dark mode**
-   - Toggle theme and verify all components look good
-
-7. **Test responsive design**
-   - Desktop (1920px, 1440px, 1024px)
-   - Tablet (768px)
-   - Mobile (375px, 320px)
+3. **Review process:**
+   - Maintainers will review your PR
+   - Address any requested changes
+   - Be patient and respectful
+   - Once approved, your PR will be merged
 
 ---
 
-## 📋 Pull Request Process
+## Widget Development Guide
 
-### 1. Prepare Your PR
+Adding a new widget is one of the most common contributions. Follow these steps:
 
-- **Keep it focused:** One PR = One feature/fix
-- **Update documentation:** If you changed functionality
-- **Add yourself to contributors:** Update README if needed
+1. **Define the widget type** in `src/types/index.ts`
+2. **Create the widget component** in `src/components/widgets/`
+3. **Register the widget** in `src/components/widgets/WidgetWrapper.tsx`
+4. **Add to widget library** in `src/components/WidgetLibrary.tsx`
+5. **Set default config** in `src/store/dashboardStore.ts`
+6. **Test thoroughly** with different configurations
 
-### 2. Commit Guidelines
-
-Use conventional commits for clear history:
-
-```bash
-# Features
-git commit -m "feat: add calendar widget"
-git commit -m "feat(crypto): add more cryptocurrencies"
-
-# Bug fixes
-git commit -m "fix: resolve dark mode color issue"
-git commit -m "fix(weather): handle API timeout errors"
-
-# Documentation
-git commit -m "docs: update widget creation guide"
-
-# Style/formatting
-git commit -m "style: format code with prettier"
-
-# Refactoring
-git commit -m "refactor: extract common widget logic"
-
-# Performance
-git commit -m "perf: optimize RSS feed parsing"
-```
-
-### 3. Create the Pull Request
-
-1. **Push to your fork**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-2. **Open a PR on GitHub**
-   - Use a descriptive title
-   - Fill out the PR template
-   - Link related issues
-   - Add screenshots/videos if UI changes
-
-3. **PR Template**
-   ```markdown
-   ## Description
-   Brief description of what this PR does
-
-   ## Type of Change
-   - [ ] Bug fix
-   - [ ] New feature
-   - [ ] Breaking change
-   - [ ] Documentation update
-
-   ## Testing
-   - [ ] Tested locally
-   - [ ] Types check pass
-   - [ ] Build succeeds
-   - [ ] Works in dark mode
-   - [ ] Responsive design verified
-
-   ## Screenshots
-   (If applicable)
-
-   ## Related Issues
-   Closes #123
-   ```
-
-### 4. Code Review
-
-- Be responsive to feedback
-- Make requested changes promptly
-- Ask questions if unclear
-- Be patient and respectful
+See the README for detailed widget development instructions.
 
 ---
 
-## 🎨 Adding a New Widget
+## Commit Message Guidelines
 
-See the detailed guide in the [README.md](README.md#-adding-a-new-widget).
+Use clear, descriptive commit messages:
 
-Quick checklist:
-- [ ] Add widget type to `src/types/index.ts`
-- [ ] Create widget component in `src/components/widgets/`
-- [ ] Register in `WidgetWrapper.tsx`
-- [ ] Add to `WidgetLibrary.tsx`
-- [ ] Update default config in `dashboardStore.ts`
-- [ ] Test thoroughly
-- [ ] Update documentation
-
----
-
-## 🐛 Debugging Tips
-
-### Common Issues
-
-1. **Type errors**
-   - Run `npm run type-check` to see all type errors
-   - Make sure all types are properly imported
-
-2. **Build fails**
-   - Clear node_modules and reinstall: `rm -rf node_modules && npm install`
-   - Check for missing dependencies
-
-3. **Widget not showing**
-   - Verify it's registered in `WidgetWrapper.tsx`
-   - Check console for errors
-   - Ensure config type matches
-
-4. **Layout issues**
-   - Check react-grid-layout props
-   - Verify widget has proper min/max sizes
-   - Test with different screen sizes
-
-### Development Tools
-
-- **React DevTools** — Inspect component tree
-- **Redux DevTools** — Debug Zustand store
-- **Network Tab** — Monitor API calls
-- **Lighthouse** — Performance audit
+- `feat: Add new weather widget`
+- `fix: Resolve dark mode toggle issue`
+- `docs: Update installation instructions`
+- `refactor: Simplify state management logic`
+- `style: Fix code formatting`
+- `test: Add tests for crypto widget`
+- `chore: Update dependencies`
 
 ---
 
-## 📚 Resources
+## Issue Reporting
 
-- [React Documentation](https://react.dev/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Tailwind CSS](https://tailwindcss.com/docs)
-- [Zustand](https://github.com/pmndrs/zustand)
-- [React Grid Layout](https://github.com/react-grid-layout/react-grid-layout)
-- [Netlify Functions](https://docs.netlify.com/functions/overview/)
+When reporting issues, please include:
 
----
-
-## ❓ Questions?
-
-- Check [GitHub Discussions](https://github.com/ryanmaynard/HomeForge/discussions)
-- Read the [README](README.md)
-- Open an issue with the `question` label
+- **Browser and OS:** Chrome 120 on macOS 14.0
+- **Steps to reproduce:** Detailed steps to trigger the issue
+- **Expected behavior:** What should happen
+- **Actual behavior:** What actually happens
+- **Screenshots:** If applicable
+- **Console errors:** Any error messages from the browser console
 
 ---
 
-## 🎉 Recognition
+## Questions?
 
-Contributors will be:
-- Listed in the README
-- Mentioned in release notes
-- Part of the HomeForge community
-
-Thank you for helping make HomeForge better! 🙏
+If you have questions about contributing:
+- Check existing issues and discussions
+- Review the README and documentation
+- Open a new discussion on GitHub
 
 ---
 
-<div align="center">
+## Code of Conduct
 
-**Happy coding!** 🚀
+- Be respectful and inclusive
+- Provide constructive feedback
+- Focus on the code, not the person
+- Help create a welcoming community
 
-</div>
+---
+
+Thank you for contributing to HomeForge!

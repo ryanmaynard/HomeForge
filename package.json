@@ -11,15 +11,17 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/react-resizable": "^3.0.8",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-grid-layout": "^1.4.4",
-    "zustand": "^4.5.2",
     "react-icons": "^5.2.1",
     "react-markdown": "^9.0.1",
-    "date-fns": "^3.6.0",
-    "clsx": "^2.1.1",
-    "uuid": "^9.0.1"
+    "react-resizable": "^3.0.5",
+    "uuid": "^9.0.1",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@netlify/functions": "^2.6.0",

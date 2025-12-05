@@ -37,6 +37,7 @@ const WeatherWidget = ({ widgetId, config }: WeatherWidgetProps) => {
     // Refresh every 30 minutes
     const interval = setInterval(loadWeather, 30 * 60 * 1000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.location, config.units]);
 
   const handleLocationSave = () => {

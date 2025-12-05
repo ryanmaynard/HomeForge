@@ -15,7 +15,7 @@ const NotesWidget = ({ widgetId, config }: NotesWidgetProps) => {
   const [mode, setMode] = useState<'edit' | 'preview'>('edit');
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<string | null>(config.lastSaved || null);
-  const saveTimeoutRef = useRef<NodeJS.Timeout>();
+  const saveTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   // Autosave with debounce
   useEffect(() => {
@@ -36,6 +36,7 @@ const NotesWidget = ({ widgetId, config }: NotesWidgetProps) => {
         clearTimeout(saveTimeoutRef.current);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 
   const saveContent = async (newContent: string) => {

@@ -25,13 +25,13 @@ class WidgetErrorBoundary extends Component<Props, State> {
     };
   }
 
-  static getDerivedStateFromError(error: Error): Partial<State> {
+  static getDerivedStateFromError(_error: Error): Partial<State> {
     return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error to console in development
-    if (import.meta.env.DEV) {
+    if (import.meta.env?.MODE === 'development') {
       console.error('Widget Error:', {
         widgetId: this.props.widgetId,
         widgetType: this.props.widgetType,
@@ -75,7 +75,7 @@ class WidgetErrorBoundary extends Component<Props, State> {
             This {this.props.widgetType} widget encountered an error and couldn't load properly.
           </p>
 
-          {import.meta.env.DEV && this.state.error && (
+          {import.meta.env?.MODE === 'development' && this.state.error && (
             <details className="mb-4 w-full max-w-md">
               <summary className="text-xs text-red-600 dark:text-red-400 cursor-pointer hover:underline">
                 Error Details (Dev Only)

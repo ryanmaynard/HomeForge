@@ -157,7 +157,7 @@ export const useDashboardStore = create<DashboardStore>((set, get) => ({
   // Remove widget
   removeWidget: (widgetId) => {
     set((state) => {
-      const { [widgetId]: removed, ...remainingWidgets } = state.widgets;
+      const { [widgetId]: _removed, ...remainingWidgets } = state.widgets;
       return {
         widgets: remainingWidgets,
         layout: state.layout.filter((item) => item.i !== widgetId),

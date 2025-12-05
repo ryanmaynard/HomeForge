@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { FiCheckCircle, FiAlertCircle, FiInfo, FiX } from 'react-icons/fi';
+/* eslint-disable react-refresh/only-export-components */
 import { create } from 'zustand';
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';

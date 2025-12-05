@@ -30,6 +30,7 @@ const TasksWidget = ({ widgetId, config }: TasksWidgetProps) => {
 
   useEffect(() => {
     loadTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [widgetId]);
 
   const handleAddTask = async () => {
@@ -101,7 +102,6 @@ const TasksWidget = ({ widgetId, config }: TasksWidgetProps) => {
 
   const activeTasks = tasks.filter((t) => !t.completed);
   const completedTasks = tasks.filter((t) => t.completed);
-  const displayTasks = config.showCompleted ? tasks : activeTasks;
 
   if (loading) {
     return (
